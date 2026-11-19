@@ -1,0 +1,16 @@
+<%- include("partials/header", { title: "Submit a Report" }) %>
+<section class="page-intro"><span class="eyebrow">CITIZEN REPORT FORM</span><h1>Submit an incident report</h1><p>Share clear and accurate information so the community and authorized personnel can review it.</p></section>
+<form class="form-card" method="POST" action="/report">
+  <div class="form-note">Fields marked with * are required. Your report will initially be marked as Pending.</div>
+  <div class="form-grid">
+    <label>Reporter name *<input name="reporterName" required maxlength="80" placeholder="Your name"></label>
+    <label>Contact number or email<input name="contact" maxlength="40" placeholder="Optional contact information"></label>
+    <label>Incident category *<select name="category" required><option value="">Choose category</option><% categories.forEach(c => { %><option value="<%= c %>"><%= c %></option><% }) %></select></label>
+    <label>Incident date and time<input type="datetime-local" name="incidentDate"></label>
+    <label class="full">Incident location *<input name="location" required maxlength="180" placeholder="Barangay, street, landmark, or nearby area"></label>
+    <label class="full">Description of incident *<textarea name="description" required maxlength="1500" rows="5" placeholder="Describe what happened, when it happened, and any important details."></textarea></label>
+    <label class="full">Photo URL (optional)<input type="url" name="photoUrl" placeholder="https://example.com/photo.jpg"><small>Use a publicly accessible image link. Do not upload private or sensitive images.</small></label>
+  </div>
+  <div class="form-actions"><a class="btn secondary" href="/">Cancel</a><button class="btn primary" type="submit">Submit Report</button></div>
+</form>
+<%- include("partials/footer") %>

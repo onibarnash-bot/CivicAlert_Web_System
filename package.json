@@ -1,0 +1,26 @@
+{
+  "name": "civicalert-disaster-reporting",
+  "version": "1.0.0",
+  "description": "Web-Based Citizen-Sourced Disaster Incident Reporting System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

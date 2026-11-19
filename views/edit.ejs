@@ -1,0 +1,14 @@
+<%- include("partials/header", { title: "Edit Incident" }) %>
+<section class="page-intro"><span class="eyebrow">ADMINISTRATOR ACTION</span><h1>Edit incident details</h1><p>Update the submitted information carefully.</p></section>
+<form class="form-card" method="POST" action="/admin/incidents/<%= incident._id %>/edit">
+  <div class="form-grid">
+    <label>Reporter name *<input name="reporterName" required value="<%= incident.reporterName %>"></label>
+    <label>Contact<input name="contact" value="<%= incident.contact || '' %>"></label>
+    <label>Category *<select name="category" required><% categories.forEach(c => { %><option value="<%= c %>" <%= incident.category === c ? "selected" : "" %>><%= c %></option><% }) %></select></label>
+    <label>Incident date<input type="datetime-local" name="incidentDate" value="<%= new Date(incident.incidentDate).toISOString().slice(0,16) %>"></label>
+    <label class="full">Location *<input name="location" required value="<%= incident.location %>"></label>
+    <label class="full">Description *<textarea name="description" rows="5" required><%= incident.description %></textarea></label>
+    <label class="full">Photo URL<input type="url" name="photoUrl" value="<%= incident.photoUrl || '' %>"></label>
+  </div><div class="form-actions"><a class="btn secondary" href="/admin">Cancel</a><button class="btn primary" type="submit">Save Changes</button></div>
+</form>
+<%- include("partials/footer") %>

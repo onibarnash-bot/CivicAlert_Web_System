@@ -1,0 +1,13 @@
+<%- include("partials/header", { title: "Admin Dashboard" }) %>
+<section class="page-intro admin-intro"><div><span class="eyebrow">CIVICALERT CONTROL CENTER</span><h1>Administrator dashboard</h1><p>Review reports, update their status, edit details, or remove duplicate records.</p></div><form method="POST" action="/admin/logout"><button class="btn secondary" type="submit">Sign Out</button></form></section>
+<section class="stats-grid">
+  <div class="stat"><span>Total reports</span><strong><%= stats.total %></strong></div><div class="stat"><span>Pending</span><strong><%= stats.pending %></strong></div><div class="stat"><span>Verified</span><strong><%= stats.verified %></strong></div><div class="stat"><span>Resolved</span><strong><%= stats.resolved %></strong></div>
+</section>
+<section class="section"><div class="section-heading"><div><span class="eyebrow">RECORD MANAGEMENT</span><h2>All incident reports</h2></div></div>
+<% if (reports.length) { %><div class="table-wrap"><table><thead><tr><th>Incident</th><th>Reporter / Date</th><th>Status and admin notes</th><th>Actions</th></tr></thead><tbody>
+<% reports.forEach(item => { %><tr><td><b><%= item.category %> — <%= item.location %></b><small><%= item.description %></small></td><td><%= item.reporterName %><small><%= new Date(item.createdAt).toLocaleString() %></small></td>
+<td><form class="status-form" method="POST" action="/admin/incidents/<%= item._id %>/update"><select name="status"><% statuses.forEach(s => { %><option value="<%= s %>" <%= item.status === s ? "selected" : "" %>><%= s %></option><% }) %></select><input name="adminNotes" value="<%= item.adminNotes || '' %>" placeholder="Administrator notes"><button class="btn primary small" type="submit">Save</button></form></td>
+<td><div class="action-row"><a class="btn secondary small" href="/admin/incidents/<%= item._id %>/edit">Edit</a><form method="POST" action="/admin/incidents/<%= item._id %>/delete" onsubmit="return confirm('Delete this incident report? This cannot be undone.');"><button class="btn danger small" type="submit">Delete</button></form></div></td></tr><% }) %>
+</tbody></table></div><% } else { %><div class="empty">There are no incident reports to manage yet.</div><% } %>
+</section>
+<%- include("partials/footer") %>
